@@ -14,7 +14,27 @@ function drawGame() {
   requestAnimationFrame(drawGame);
   clearScreen();
   inputs();
+  boundaryCheck();
   drawGreenBlob();
+}
+
+function boundaryCheck() {
+  // up
+  if (y < radius) {
+    y = radius;
+  }
+  // down
+  if (y > canvas.height - radius) {
+    y = canvas.height - radius;
+  }
+  // left
+  if (x < radius) {
+    x = radius;
+  }
+  // right
+  if (x > canvas.width - radius) {
+    x = canvas.width - radius;
+  }
 }
 function inputs() {
   if (downPressed) {
@@ -32,6 +52,18 @@ function inputs() {
 }
 function drawGreenBlob() {
   ctx.fillStyle = "green";
+  if (upPressed) {
+    ctx.fillStyle = "red";
+  }
+  if (downPressed) {
+    ctx.fillStyle = "blue";
+  }
+  if (leftPressed) {
+    ctx.fillStyle = "yellow";
+  }
+  if (rightPressed) {
+    ctx.fillStyle = "purple";
+  }
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, Math.PI * 2);
   ctx.fill();
